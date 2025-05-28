@@ -1,0 +1,737 @@
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+    webhookUrl: 'https://automindfuture.app.n8n.cloud/webhook/b27638b6-822b-4955-8817-f97a73a1dedc/chat',
+    webhookConfig: {
+      method: 'POST',
+      headers: {}
+    },
+    target: '#n8n-chat',
+    mode: 'window',
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    metadata: {},
+    showWelcomeScreen: true,
+    defaultLanguage: 'en',
+    initialMessages: [
+      'Welcome to NewClub — a private golf society inspired by the traditions of the game.You’re welcome to ask anything about membership, course access, or upcoming events.',
+	  'To get started, here are a few popular questions:[How do I apply for membership?][What are the membership tiers and pricing?][What types of courses do members get access?]Click a question to learn more — or type your own anytime.'
+    ],
+    i18n: {
+      en: {
+        title: '',
+        subtitle: "",
+        footer: '',
+        getStarted: 'New Conversation',
+        inputPlaceholder: 'Type your question here...',
+      },
+    },
+  });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $ = (selector, scope = document) => scope.querySelector(selector);
+  const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+  const debounce = (fn, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    };
+  };
+
+  // --- Handle Clickable Suggested Questions ---
+  window.handleQuestionClick = (q) => {
+    const input = $('textarea[placeholder="Type your question here..."]');
+    if (!input) return console.warn("Chat input field not found.");
+    input.value = q.replace(/^\[|\]$/g, '').trim();
+    ['input', 'change'].forEach(evt => input.dispatchEvent(new Event(evt, { bubbles: true })));
+    input.focus();
+    setTimeout(() => $('.chat-input-send-button')?.click(), 200);
+  };
+
+  // --- Replace Chat Icon ---
+  const svgIcon = $('.chat-window-toggle svg');
+  if (svgIcon) {
+    svgIcon.outerHTML = `<img src="https://demo2.autocomputation.com/wp-content/uploads/2025/05/bee-icon_transparent_green-2-scaled.png" width="32" height="32" alt="Chat Logo">`;
+  }
+
+  // --- Footer Branding Update ---
+  const footerLink = $('.chat-powered-by a');
+  if (footerLink) {
+    Object.assign(footerLink, {
+      textContent: 'NewClub Team',
+      href: 'https://newclub.golf',
+      target: '_blank',
+      rel: 'noopener',
+    });
+  }
+
+  // --- Timestamps on Messages ---
+  function setupTimestamps() {
+    const getTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+    function addTimestamp(msg) {
+      if (msg.querySelector('.timestamp')) return;
+      const ts = document.createElement('div');
+      ts.className = 'timestamp';
+      ts.textContent = getTime();
+      Object.assign(ts.style, {
+        fontSize: '10px',
+        color: '#7A7A7A',
+        marginTop: '-0px',
+        textAlign: 'end',
+        marginBottom: '-5px',
+		fontStyle: 'italic',
+      });
+      msg.appendChild(ts);
+    }
+
+    function observeChat(container) {
+      $$('.chat-message', container).forEach(addTimestamp);
+      new MutationObserver(muts => {
+        muts.forEach(m => {
+          m.addedNodes.forEach(n => n.classList?.contains('chat-message') && addTimestamp(n));
+        });
+      }).observe(container, { childList: true });
+    }
+
+    $('.chat-window-toggle')?.addEventListener('click', () => {
+      const observer = new MutationObserver((muts, obs) => {
+        const list = $('.chat-messages-list');
+        if (list) {
+          observeChat(list);
+          obs.disconnect();
+        }
+      });
+      observer.observe($('.chat-window'), { childList: true, subtree: true });
+    });
+
+    document.addEventListener('click', e => {
+      if (e.target.closest('.chat-button')) observeChat($('.chat-messages-list'));
+    });
+  }
+
+  // --- Message Content Processor ---
+  function setupMessageProcessing() {
+    function process(p) {
+      if (!p || p.dataset.processed) return;
+      p.dataset.processed = 'true';
+      p.innerHTML = p.innerHTML
+        .replace(/hello@newclub\.golf/g, '<a href="mailto:hello@newclub.golf" style="color:#1F3926;">hello@newclub.golf</a>')
+    
+        .replace(/\[(.*?)\]/g, (_, q) => `<a href="javascript:void(0)" onclick="window.handleQuestionClick('[${q}]')" class="suggested-question">[${q}]</a>`);
+    }
+
+    function observe() {
+      const container = $('.chat-messages-list');
+      if (!container) return false;
+
+      $$('.chat-message-from-bot .chat-message-markdown p', container).forEach(process);
+
+      new MutationObserver(muts => {
+        muts.forEach(m => {
+          m.addedNodes.forEach(n => {
+            if (n.nodeType === 1) {
+              setTimeout(() => {
+                $$('p', n).forEach(process);
+              }, 100);
+            }
+          });
+        });
+      }).observe(container, { childList: true, subtree: true });
+
+      return true;
+    }
+
+    if (!observe()) {
+      new MutationObserver((_, obs) => {
+        if (observe()) obs.disconnect();
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+  }
+
+  // --- Chat Bubble ---
+  function setupChatBubble() {
+    const toggle = $('.chat-window-toggle');
+    if (!toggle) return;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.innerHTML = `<div class="chat-bubble-content"><p>Chat with us!</p></div>`;
+    bubble.style.display = 'block';
+    toggle.parentNode.insertBefore(bubble, toggle);
+
+    toggle.addEventListener('click', () => {
+      const isVisible = getComputedStyle($('.chat-window')).display !== 'none';
+      bubble.style.display = isVisible ? 'none' : 'block';
+    });
+  }
+
+  // --- Get Started Enhancer ---
+  function setupGetStartedUI() {
+    function enhance(wrapper) {
+      if (wrapper.dataset.getStartedSetup) return;
+      wrapper.dataset.getStartedSetup = 'true';
+
+      const intro = document.createElement('div');
+      intro.className = 'chat-get-started-intro';
+      intro.textContent = 'Welcome to NewClub.';
+      wrapper.insertBefore(intro, $('.chat-button', wrapper));
+
+      const btn = $('.chat-button', wrapper);
+      btn.textContent = '';
+      btn.append(Object.assign(document.createElement('span'), { textContent: 'Start a new conversation' }));
+      btn.insertAdjacentHTML('beforeend', `
+        <span style="margin-left: 8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>`);
+    }
+
+    const start = $('.chat-get-started');
+    if (start) enhance(start);
+
+    new MutationObserver(muts => {
+      muts.forEach(m => m.addedNodes.forEach(n => n.matches?.('.chat-get-started') && enhance(n)));
+    }).observe($('.chat-body'), { childList: true });
+
+    $('.chat-window-toggle')?.addEventListener('click', () => setTimeout(() => {
+      const w = $('.chat-get-started');
+      if (w) enhance(w);
+    }, 50));
+  }
+
+  // --- Inactivity Message ---
+  function setupInactivityTimer() {
+    const INACTIVITY_DELAY = 300000;
+    const TYPING_DURATION = 1500;
+    let timer;
+
+    const scrollBottom = el => el?.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+
+    function createBotMessage(content, id = '') {
+      const el = document.createElement('div');
+      el.className = 'chat-message chat-message-from-bot';
+      if (id) el.id = id;
+      el.innerHTML = `<div class="chat-message-bubble"><div class="chat-message-markdown"><p>${content}</p></div></div>`;
+      return el;
+    }
+
+    function resetTimer() {
+      clearTimeout(timer);
+      $('#inactivity-message')?.remove();
+      $('#typing-indicator')?.remove();
+      timer = setTimeout(() => {
+        const list = $('.chat-messages-list');
+        if (!list) return;
+        list.appendChild(createBotMessage('<em>Typing...</em>', 'typing-indicator'));
+        scrollBottom(list);
+        setTimeout(() => {
+          $('#typing-indicator')?.remove();
+          list.appendChild(createBotMessage('Still there? Let us know if you have any questions!', 'inactivity-message'));
+          scrollBottom(list);
+        }, TYPING_DURATION);
+      }, INACTIVITY_DELAY);
+    }
+
+    const setupListeners = () => {
+      const textarea = $('.chat-inputs textarea');
+      if (textarea) {
+        textarea.addEventListener('input', resetTimer);
+        textarea.addEventListener('focus', resetTimer);
+      }
+    };
+
+    const obs = new MutationObserver(() => {
+      if ($('.chat-inputs textarea')) {
+        setupListeners();
+        obs.disconnect();
+      }
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    resetTimer();
+  }
+
+  // --- Run All Setup Functions ---
+  setupTimestamps();
+  setupMessageProcessing();
+  setupChatBubble();
+  setupGetStartedUI();
+  setupInactivityTimer();
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('.chat-window-toggle, .chat-button')) {
+      setTimeout(setupMessageProcessing, 500);
+    }
+  });
+});
+</script>
+
+<script>
+(function() {
+  // cookie helpers
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+  function setCookie(name, value, days = 30) {
+    const expires = new Date(Date.now() + days*864e5).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+  }
+
+  // central routine: check & update cookie
+  function maybeStoreSessionId(sessionId) {
+    const current = getCookie('automindSessionId');
+    if (current !== sessionId) {
+      setCookie('automindSessionId', sessionId);
+      console.log('[chat] automindSessionId cookie set →', sessionId);
+    }
+  }
+
+  // --- Wrap fetch ---
+  const origFetch = window.fetch;
+  window.fetch = function(input, init = {}) {
+    const url = typeof input === 'string' ? input : input.url;
+    if (url && url.includes('/webhook/') && url.endsWith('/chat') && init.body) {
+      try {
+        const payload = JSON.parse(init.body);
+        if (payload.sessionId) maybeStoreSessionId(payload.sessionId);
+      } catch {}
+    }
+    return origFetch.apply(this, arguments);
+  };
+
+  // --- Wrap XHR ---
+  const origOpen = XMLHttpRequest.prototype.open;
+  const origSend = XMLHttpRequest.prototype.send;
+
+  XMLHttpRequest.prototype.open = function(method, url) {
+    this.__chatURL = url;
+    return origOpen.apply(this, arguments);
+  };
+  XMLHttpRequest.prototype.send = function(body) {
+    if (this.__chatURL && this.__chatURL.includes('/webhook/') && this.__chatURL.endsWith('/chat') && body) {
+      try {
+        const payload = JSON.parse(body);
+        if (payload.sessionId) maybeStoreSessionId(payload.sessionId);
+      } catch {}
+    }
+    return origSend.apply(this, arguments);
+  };
+})();
+	  
+</script>
+<style>
+  /* Add to your existing CSS */
+  .chat-header-subscribe {
+    position: absolute;
+    left: 78%;
+    top: 4%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  .subscribe-btn {
+    background: #1F3926; /* Matching your brand green */
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 15px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .subscribe-btn:hover {
+    background: #2a4d32;
+    transform: translateY(-1px);
+  }
+  
+     }
+ 
+  
+  /* Push existing header content right */
+  .chat-header-content {
+    margin-left: 80px !important;
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Wait for chat header to load
+  const observer = new MutationObserver((mutations, obs) => {
+    const header = document.querySelector('.chat-header');
+    if (header && !document.querySelector('.chat-header-subscribe')) {
+      // Create subscribe button
+      const subscribeDiv = document.createElement('div');
+      subscribeDiv.className = 'chat-header-subscribe';
+      subscribeDiv.innerHTML = `
+        <button class="subscribe-btn" onclick="handleSubscribe()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h12zm-4 5a1 1 0 0 0-1-1H7a1 1 0 1 0 0 2h6a1 1 0 0 0 1-1z"/>
+          </svg>
+          Subscribe
+        </button>
+      `;
+      header.prepend(subscribeDiv);
+      obs.disconnect();
+    }
+  });
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+// Handle subscribe action
+window.handleSubscribe = () => {
+  // Your subscription logic here
+  console.log('Subscribe clicked');
+  // Example: Open a subscription form
+  const email = prompt('Enter your email for updates:');
+  if (email) {
+    alert(`Thanks for subscribing! We'll send updates to ${email}`);
+  }
+};
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Add the form styles
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Subscribe button styles */
+    .chat-header-subscribe {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    
+    .subscribe-btn {
+      background: #35563ee8;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .subscribe-btn:hover {
+      background: #2a4d32;
+      transform: translateY(-1px);
+    }
+    
+   
+    
+    .chat-header-content {
+      margin-left: 80px !important;
+    }
+    
+    /* Popup form styles */
+    .subscribe-popup {
+        position: fixed;
+        top: 51%;
+        left: 86%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 10020;
+        width: 75%;
+        max-width: 506px;
+        height: 702px;
+    }
+    
+    .subscribe-popup h3 {
+      color: #1F3926;
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .form-row {
+      margin-bottom: 15px;
+    }
+    
+    .form-row input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .form-row input:focus {
+      outline: none;
+      border-color: #1F3926;
+    }
+    
+    .submit-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1F3926;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    
+    .submit-button:hover {
+      background-color: #16311c;
+    }
+    
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+/* Fullscreen overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+      background: rgb(0 0 0 / 15%);
+  z-index: 999;
+}
+
+/* Fullscreen popup container */
+.subscribe-popup {
+    position: fixed;
+    top: 51%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    background: #efefef;
+    width: 100%;
+    max-width: 501px;
+    height: 700px;
+    padding: 40px 30px;
+    border-radius: 10px;
+    z-index: 10020;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+.subscribe-content {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    MARGIN-TOP: 33PX;
+    PADDING: 6PX;
+}
+
+.subscribe-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.subscribe-popup h2 {
+  font-size: 24px;
+  color: #1F3926;
+  margin-bottom: 8px;
+}
+
+.subscribe-tagline {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 20px;
+  max-width: 420px;
+}
+
+/* Form styles */
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.subscribe-form input {
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 13px;
+    font-size: 14px;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;   
+    margin-top: 10px;
+}
+
+.subscribe-form input:focus {
+  border-color: #1F3926;
+  box-shadow: 0 0 0 2px rgba(31, 57, 38, 0.2);
+  outline: none;
+}
+
+/* Submit button */
+.submit-button {
+     background-color: #1F3926;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 17px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #2a4d32;
+}
+
+  `;
+  document.head.appendChild(style);
+
+  // Create Subscribe button
+  const createSubscribeButton = () => {
+    const header = document.querySelector('.chat-header');
+    if (header && !document.querySelector('.chat-header-subscribe')) {
+      const subscribeDiv = document.createElement('div');
+      subscribeDiv.className = 'chat-header-subscribe';
+      subscribeDiv.innerHTML = `
+        <button class="subscribe-btn">
+          
+          Subscribe
+        </button>
+      `;
+      header.prepend(subscribeDiv);
+      
+      // Add click event
+      subscribeDiv.querySelector('.subscribe-btn').addEventListener('click', showSubscribePopup);
+    }
+  };
+
+  // Show popup form
+  const showSubscribePopup = () => {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    
+    // Create popup
+    const popup = document.createElement('div');
+    popup.className = 'subscribe-popup';
+    popup.innerHTML = `
+          
+  <div class="subscribe-content">
+    <img src="https://demo2.autocomputation.com/wp-content/uploads/2025/05/bee-icon_transparent_green-2-scaled.png" alt="NewClub Logo" class="subscribe-logo" />
+    <h2>Join the NewClub Newsletter</h2>
+    <p class="subscribe-tagline">Be the first to know about exclusive events, member benefits, and course access updates.</p>
+
+    <form id="subscribeForm" class="subscribe-form">
+      <div class="form-row">
+        <input type="text" name="first_name" placeholder="First Name" required>
+      </div>
+      <div class="form-row">
+        <input type="text" name="last_name" placeholder="Last Name" required>
+      </div>
+      <div class="form-row">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+      <button type="submit" class="submit-button">
+        Subscribe Now
+      </button>
+    </form>
+  </div>
+
+
+
+    `;
+    
+    // Add to body
+    document.body.appendChild(overlay);
+    document.body.appendChild(popup);
+    
+    // Handle form submission
+    const form = document.getElementById('subscribeForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const firstName = this.querySelector('[name="first_name"]').value;
+      const lastName = this.querySelector('[name="last_name"]').value;
+      const email = this.querySelector('[name="email"]').value;
+      
+      // Get session ID from cookie
+      const sessionId = document.cookie.match(/(^| )automindSessionId=([^;]+)/)?.[2];
+      
+      // Submit to webhook
+      const params = new URLSearchParams({
+        firstName,
+        lastName,
+        email,
+        ...(sessionId && { sessionId })
+      });
+      
+      fetch(`https://automindfuture.app.n8n.cloud/webhook/fac9f668-bc3c-4654-beaa-b2bd6aebc912?${params}`, {
+        method: 'GET',
+        cache: 'no-store'
+      })
+      .then(response => {
+        if (response.ok) {
+          // Show success message in chat
+          const chatMessages = document.querySelector('.chat-messages-list');
+          if (chatMessages) {
+            const successMsg = document.createElement('div');
+            successMsg.className = 'chat-message chat-message-from-bot';
+            successMsg.innerHTML = `
+              <div class="chat-message-bubble">
+                <div class="chat-message-markdown">
+                  <p>Thank you for subscribing, ${firstName}! You'll receive updates at ${email}.</p>
+                </div>
+              </div>
+            `;
+            chatMessages.appendChild(successMsg);
+          }
+          
+          // Close popup
+          closePopup();
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+    
+    // Close popup when clicking outside
+    overlay.addEventListener('click', closePopup);
+    
+    function closePopup() {
+      document.body.removeChild(overlay);
+      document.body.removeChild(popup);
+    }
+  };
+
+  // Initialize the button
+  createSubscribeButton();
+  
+  // Fallback in case chat header loads later
+  const observer = new MutationObserver(() => {
+    createSubscribeButton();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+</script>

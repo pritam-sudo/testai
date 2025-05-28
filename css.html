@@ -1,0 +1,318 @@
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add the form styles
+      const style = document.createElement('style');
+      style.textContent = `
+        /* Subscribe button styles */
+        .chat-header-subscribe {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+        }
+        
+        .subscribe-btn {
+          background: #35563ee8;
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          font-size: 12px;
+          border-radius: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+        
+        .subscribe-btn:hover {
+          background: #2a4d32;
+          transform: translateY(-1px);
+        }
+        
+       
+        
+        .chat-header-content {
+          margin-left: 80px !important;
+        }
+        
+        /* Popup form styles */
+        .subscribe-popup {
+            position: fixed;
+            top: 51%;
+            left: 86%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 10020;
+            width: 75%;
+            max-width: 506px;
+            height: 702px;
+        }
+        
+        .subscribe-popup h3 {
+          color: #1F3926;
+          margin-top: 0;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        
+        .form-row {
+          margin-bottom: 15px;
+        }
+        
+        .form-row input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+        
+        .form-row input:focus {
+          outline: none;
+          border-color: #1F3926;
+        }
+        
+        .submit-button {
+          width: 100%;
+          padding: 10px;
+          background-color: #1F3926;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+        
+        .submit-button:hover {
+          background-color: #16311c;
+        }
+        
+        .popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 999;
+        }
+    /* Fullscreen overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+          background: rgb(0 0 0 / 15%);
+      z-index: 999;
+    }
+    /* Fullscreen popup container */
+    .subscribe-popup {
+        position: fixed;
+        top: 51%;
+        left: 86%;
+        transform: translate(-50%, -50%);
+        background: #efefef;
+        width: 100%;
+        max-width: 501px;
+        height: 700px;
+        padding: 40px 30px;
+        border-radius: 10px;
+        z-index: 10020;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .subscribe-content {
+         display: flex;
+        flex-direction: column;
+        align-items: center;
+        MARGIN-TOP: 33PX;
+        PADDING: 6PX;
+    }
+    .subscribe-logo {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    .subscribe-popup h2 {
+      font-size: 24px;
+      color: #1F3926;
+      margin-bottom: 8px;
+    }
+    .subscribe-tagline {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 20px;
+      max-width: 420px;
+    }
+    /* Form styles */
+    .subscribe-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 15px;
+    }
+    .subscribe-form input {
+        padding: 13px;
+        border: 1px solid #ccc;
+        border-radius: 13px;
+        font-size: 14px;
+        width: 100%;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;   
+        margin-top: 10px;
+    }
+    .subscribe-form input:focus {
+      border-color: #1F3926;
+      box-shadow: 0 0 0 2px rgba(31, 57, 38, 0.2);
+      outline: none;
+    }
+    /* Submit button */
+    .submit-button {
+         background-color: #1F3926;
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 17px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .submit-button:hover {
+      background-color: #2a4d32;
+    }
+      `;
+      document.head.appendChild(style);
+      // Create Subscribe button
+      const createSubscribeButton = () => {
+        const header = document.querySelector('.chat-header');
+        if (header && !document.querySelector('.chat-header-subscribe')) {
+          const subscribeDiv = document.createElement('div');
+          subscribeDiv.className = 'chat-header-subscribe';
+          subscribeDiv.innerHTML = `
+            <button class="subscribe-btn">
+              
+              Subscribe
+            </button>
+          `;
+          header.prepend(subscribeDiv);
+          
+          // Add click event
+          subscribeDiv.querySelector('.subscribe-btn').addEventListener('click', showSubscribePopup);
+        }
+      };
+      // Show popup form
+      const showSubscribePopup = () => {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'popup-overlay';
+        
+        // Create popup
+        const popup = document.createElement('div');
+        popup.className = 'subscribe-popup';
+        popup.innerHTML = `
+              
+      <div class="subscribe-content">
+        <img src="https://demo2.autocomputation.com/wp-content/uploads/2025/05/bee-icon_transparent_green-2-scaled.png" alt="NewClub Logo" class="subscribe-logo" />
+        <h2>Join the NewClub Newsletter</h2>
+        <p class="subscribe-tagline">Be the first to know about exclusive events, member benefits, and course access updates.</p>
+        <form id="subscribeForm" class="subscribe-form">
+          <div class="form-row">
+            <input type="text" name="first_name" placeholder="First Name" required>
+          </div>
+          <div class="form-row">
+            <input type="text" name="last_name" placeholder="Last Name" required>
+          </div>
+          <div class="form-row">
+            <input type="email" name="email" placeholder="Email Address" required>
+          </div>
+          <button type="submit" class="submit-button">
+            Subscribe Now
+          </button>
+        </form>
+      </div>
+        `;
+        
+        // Add to body
+        document.body.appendChild(overlay);
+        document.body.appendChild(popup);
+        
+        // Handle form submission
+        const form = document.getElementById('subscribeForm');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const firstName = this.querySelector('[name="first_name"]').value;
+          const lastName = this.querySelector('[name="last_name"]').value;
+          const email = this.querySelector('[name="email"]').value;
+          
+          // Get session ID from cookie
+          const sessionId = document.cookie.match(/(^| )automindSessionId=([^;]+)/)?.[2];
+          
+          // Submit to webhook
+          const params = new URLSearchParams({
+            firstName,
+            lastName,
+            email,
+            ...(sessionId && { sessionId })
+          });
+          
+          fetch(`https://automindfuture.app.n8n.cloud/webhook/fac9f668-bc3c-4654-beaa-b2bd6aebc912?${params}`, {
+            method: 'GET',
+            cache: 'no-store'
+          })
+          .then(response => {
+            if (response.ok) {
+              // Show success message in chat
+              const chatMessages = document.querySelector('.chat-messages-list');
+              if (chatMessages) {
+                const successMsg = document.createElement('div');
+                successMsg.className = 'chat-message chat-message-from-bot';
+                successMsg.innerHTML = `
+                  <div class="chat-message-bubble">
+                    <div class="chat-message-markdown">
+                      <p>Thank you for subscribing, ${firstName}! You'll receive updates at ${email}.</p>
+                    </div>
+                  </div>
+                `;
+                chatMessages.appendChild(successMsg);
+              }
+              
+              // Close popup
+              closePopup();
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        });
+        
+        // Close popup when clicking outside
+        overlay.addEventListener('click', closePopup);
+        
+        function closePopup() {
+          document.body.removeChild(overlay);
+          document.body.removeChild(popup);
+        }
+      };
+      // Initialize the button
+      createSubscribeButton();
+      
+      // Fallback in case chat header loads later
+      const observer = new MutationObserver(() => {
+        createSubscribeButton();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+    </script>

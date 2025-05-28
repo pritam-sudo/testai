@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en" class="mod_no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="version" content="4.0.66">
+        <title>Huncwot</title>
+        <meta name="description" content="Crafting digital products that AI can only dream of.">
+        <meta property="og:description" content="Crafting digital products that AI can only dream of.">
+        <meta property="og:title" content="Huncwot">
+        <meta property="og:image" content="https://huncwot.com/public/og_image.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:url" content="https://huncwot.com">
+        <meta property="og:type" content="website">
+        <meta property="twitter:card" content="summary">
+        <meta property="twitter:title" content="Huncwot">
+        <meta property="twitter:description" content="Crafting digital products that AI can only dream of.">
+        <meta property="twitter:image" content="https://huncwot.com/public/og_image.png">
+        <meta property="twitter:url" content="https://huncwot.com">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SV0JTS9DCW"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-SV0JTS9DCW');
+        </script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/public/theme/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/theme/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/theme/favicons/favicon-16x16.png">
+        <link rel="icon" type="image/svg+xml" href="/public/theme/favicons/favicon.svg">
+        <link rel="manifest" href="/public/theme/favicons/site.webmanifest">
+        <link rel="mask-icon" href="/public/theme/favicons/safari-pinned-tab.svg" color="#C12929">
+        <meta name="msapplication-TileColor" content="#C12929">
+        <meta name="theme-color" content="#C12929">
+        <!-- critical css -->
+        <style>
+            .s-bg__wrap {
+                height: 77.5svh;
+                padding-bottom: 1.25rem
+            }
+
+            @media (min-width: 1024px) {
+                .s-bg__wrap {
+                    min-height:38.375rem;
+                    max-height: 56.25vw
+                }
+            }
+
+            @media (max-width: 1023px) {
+                .s-bg__wrap {
+                    height:calc(var(--app-height) - var(--radius) * 2);
+                    padding-bottom: 1.125rem
+                }
+            }
+
+            .s-header {
+                z-index: 5;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin-top: 1.25rem;
+                align-items: flex-start
+            }
+
+            .s-header__logo {
+                grid-column: 1 / span 8
+            }
+
+            @media (max-width: 659px) {
+                .s-header__logo {
+                    padding-top:0;
+                    margin-left: 0;
+                    grid-column: auto
+                }
+            }
+
+            .s-header__logo svg {
+                margin-top: .75rem;
+                width: 13.4375rem;
+                height: auto
+            }
+
+            @media (max-width: 659px) {
+                .s-header__logo svg {
+                    width:8.5rem
+                }
+            }
+
+            .s-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: calc(100lvh + 2px);
+                backface-visibility: hidden
+            }
+
+            .s-bg__wrap {
+                position: relative;
+                z-index: 1;
+                align-items: flex-end
+            }
+
+            @media (max-width: 1023px) {
+                .s-bg--lab-shapes .s-bg__wrap,.s-bg--branded-circle .s-bg__wrap {
+                    display:flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center
+                }
+            }
+
+            .s-bg__svg {
+                grid-column: 9 / span 6;
+                position: relative;
+                transition: opacity 0.8s cubic-bezier(0.5, 0, 0.2, 1),translate 0.8s cubic-bezier(0.5, 0, 0.2, 1);
+                --color: #333;
+                --bg-color: #C12929
+            }
+
+            body.is-not-ready .s-bg__svg {
+                opacity: 0;
+                translate: 0 100px
+            }
+
+            @media (min-width: 660px) and (max-width: 1023px) {
+                .s-bg__svg {
+                    grid-column:3 / span 2
+                }
+            }
+
+            @media (max-width: 659px) {
+                .s-bg__svg {
+                    grid-column:2 / span 1
+                }
+            }
+
+            .s-bg__svg svg {
+                position: absolute;
+                bottom: 0
+            }
+
+            @media (max-width: 1023px) {
+                .s-bg--lab-shapes .s-bg__svg svg,.s-bg--branded-circle .s-bg__svg svg {
+                    position:relative
+                }
+            }
+
+            .s-bg--lab-shapes .s-bg__svg svg {
+                right: 0;
+                transition-duration: 0.6s
+            }
+
+            @media (min-width: 660px) {
+                .s-bg--lab-shapes .s-bg__svg svg {
+                    width:40.9375vw;
+                    height: 20.46875vw
+                }
+            }
+
+            @media (max-width: 659px) {
+                .s-bg--lab-shapes .s-bg__svg svg {
+                    width:100%
+                }
+            }
+
+            body.is-scrolled .s-bg--lab-shapes .s-bg__svg svg {
+                opacity: 0
+            }
+
+            .s-bg__svg svg,.s-bg__svg canvas {
+                transition: opacity 0.3s
+            }
+
+            .s-bg__svg canvas {
+                position: absolute;
+                bottom: 0
+            }
+
+            body:not(.gfx-on) .s-bg__svg canvas {
+                opacity: 0
+            }
+
+            .s-bg__svg canvas+svg {
+                opacity: 0;
+                pointer-events: none
+            }
+
+            .debug .s-bg__svg canvas+svg {
+                opacity: 1;
+                z-index: 100
+            }
+
+            .debug .s-bg__svg canvas+svg * {
+                fill: none;
+                stroke: cyan;
+                stroke-width: 2px
+            }
+
+            body:not(.gfx-on) .s-bg__svg canvas+svg {
+                opacity: 1
+            }
+
+            @media (max-width: 659px) {
+                body.is-scrolled-to-footer .s-bg__svg canvas,body.is-scrolled-to-footer .s-bg__svg svg {
+                    opacity:0 !important
+                }
+            }
+
+            body.is-not-ready .s-trigger,body.is-not-ready .s-header__nav,body.is-not-ready .s-header__socials,body.is-not-ready .m-work,body.is-not-ready #contact,body.is-not-ready #content {
+                opacity: 0
+            }
+
+            body.is-not-ready #content {
+                transform: translateY(100px)
+            }
+
+            html {
+                overflow-y: scroll
+            }
+
+            h1 {
+                margin: unset
+            }
+
+            @media (max-width: 659px) {
+                .grid-wrap {
+                    margin-inline:1rem
+                }
+            }
+
+            @media (min-width: 660px) and (max-width: 1023px) {
+                .grid-wrap {
+                    margin-inline:1.125rem
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .grid-wrap {
+                    margin-inline:1.375rem
+                }
+            }
+
+            @media (min-width: 1800px) {
+                .grid-wrap {
+                    margin-inline:1.5625rem
+                }
+            }
+        </style>
+        <link rel="dns-prefetch" href="https://google-analytics.com">
+        <link rel="stylesheet" href="/public/theme/styles.css?v=4.0.66"/>
+    </head>
+    <body class="is-not-ready" style="background-color:#C12929">
+        <div class="wrapper" id="wrapper">
+            <div class="s-trigger">
+                <a href="#contact" class="s-trigger__btn">
+                    <div data-text="Contact" data-cssanimate="span">
+                        <span>Contact</span>
+                        <svg class="svg-globe" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 19a9 9 0 100-18 9 9 0 000 18z" stroke="#E9EAEB" stroke-linecap="square" stroke-linejoin="bevel"/>
+                            <path d="M10 19c1.657 0 3-4.03 3-9s-1.343-9-3-9-3 4.03-3 9 1.343 9 3 9z" stroke="#E9EAEB" stroke-linecap="square" stroke-linejoin="bevel"/>
+                            <path d="M1 10h18" stroke="#E9EAEB"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            <!-- huncwot -->
+            <div class="s-bg">
+                <div class="s-bg__wrap grid-wrap">
+                    <div class="s-bg__svg" data-component="Bg">
+                        <canvas></canvas>
+                        <svg class="svg-h" viewBox="0 0 725 725">
+                            <path fill="none" d="M67 0v731.2l435.8-436c56.9-56 148.1-17 148.1 60.3v369.6"/>
+                            <path fill="#333" d="M623.45 213.23c-57.23-23.72-122.54-10.73-166.37 33.09L134.37 569.04V569l-60.38 60.42c-.2.2-.45.29-.71.29s-.51-.1-.71-.29a.996.996 0 010-1.41l61.8-61.84V0H0v724.91h168.53L552.1 341.34c7.14-7.14 14.78-6.1 19.93-3.97s11.29 6.8 11.29 16.89V724.9h134.37V354.26c0-61.96-36.99-117.33-94.24-141.04z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <header class="s-header grid-wrap">
+                <h1 class="s-header__logo">
+                    <svg class="svg-huncwot-logo" width="215" height="41" viewBox="0 0 215 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1954_2569)" fill="#DCDCDC">
+                            <path d="M.104.576h7.901v10.77C9.953 9.4 12.37 8.223 16.023 8.223c10.142 0 10.733 8.194 10.733 13.855v17.333h-7.902V23.315c0-3.835 0-8.195-4.834-8.195-4.365 0-6.015 3.775-6.015 8.432v15.86H.104V.575zM31.115 26.146V8.869h7.902v15.92c0 5.07.116 8.37 4.48 8.37 5.541 0 6.132-5.307 6.132-8.491v-15.8h7.901v30.543h-7.134v-3.774c-1.771 2.654-4.244 4.42-8.902 4.42-10.318 0-10.379-8.608-10.379-13.916v.005zM62.71 8.868h7.902v2.478c1.947-1.948 4.364-3.124 8.078-3.124 10.672 0 10.672 9.26 10.672 15.093V39.41H81.46V23.315c0-3.951 0-8.195-4.773-8.195-4.365 0-6.075 3.775-6.075 8.432v15.86H62.71V8.867zM91.835 24.319c0-10.38 6.605-16.097 15.037-16.097 6.191 0 11.141 3.068 13.265 8.493l-6.484 2.533c-1.004-2.654-3.36-4.42-6.544-4.42-4.421 0-7.312 3.42-7.312 9.137 0 5.718 2.71 9.432 7.372 9.432 3.537 0 5.424-2.004 6.428-4.718l6.838 2.3c-1.887 5.718-6.368 9.078-13.443 9.078-9.138 0-15.152-5.717-15.152-15.743l-.005.005zM120.933 8.869h8.432l5.541 19.75 5.601-19.75h7.78l5.601 19.75 5.601-19.75h8.195L157.486 39.41h-7.372l-5.838-21.228-5.717 21.228h-7.372L120.929 8.87h.004zM167.093 24.082c0-9.729 5.717-15.86 14.855-15.86 9.138 0 14.916 6.131 14.916 15.86 0 9.728-5.717 15.98-14.916 15.98-9.198 0-14.855-6.191-14.855-15.98zm21.99.06c0-5.838-2.477-9.375-7.135-9.375-4.657 0-7.074 3.537-7.074 9.315 0 5.777 2.477 9.435 7.074 9.435 4.597 0 7.135-3.597 7.135-9.375zM200.991 32.983V15.297h-4.244V8.87h4.244V.498h7.902v8.37h4.894v6.43h-4.894V30.45c0 3.244 1.004 3.42 5.363 2.77v6.131c-1.413.414-3.3.707-5.717.707-5.247 0-7.548-2.301-7.548-7.075z"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1954_2569">
+                                <path fill="#fff" transform="translate(.107 .498)" d="M0 0h214.152v39.56H0z"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </h1>
+                <div class="s-header__nav">
+                    <a href="#contact" target="_blank" class="s-header__nav-item" data-cssanimate="span" data-text="Contact">
+                        <span>Contact</span>
+                    </a>
+                </div>
+                <div class="s-header__socials">
+                    <a href="https://www.linkedin.com/company/huncwot/" target="_blank" class="s-header__social-item" data-cssanimate="span" data-text="In">
+                        <span>In</span>
+                    </a>
+                    <a href="https://www.instagram.com/huncwotdigital/" target="_blank" class="s-header__social-item" data-cssanimate="span" data-text="Ig">
+                        <span>Ig</span>
+                    </a>
+                </div>
+            </header>
+            <main id="content" class="content is-home">
+                <article data-page="Page" data-title="Huncwot" data-alternate='null'>
+                    <h1 class="sr-only">Huncwot</h1>
+                    <section class="module module--hero has-next-sibling-work has-next-sibling-work" data-scroll="hero">
+                        <div class="module__wrap">
+                            <div class="m-hero grid-wrap">
+                                <p class="m-hero__text" data-scroll="splitText" data-delay="1">
+                                    <span>
+                                        <span>Crafting</span>
+                                    </span>
+                                    <span>
+                                        <span>digital</span>
+                                    </span>
+                                    <span>
+                                        <span>products</span>
+                                    </span>
+                                    <span>
+                                        <span>that</span>
+                                    </span>
+                                    <span>
+                                        <span>AI</span>
+                                    </span>
+                                    <span>
+                                        <span>can</span>
+                                    </span>
+                                    <span>
+                                        <span>only</span>
+                                    </span>
+                                    <span>
+                                        <span>dream</span>
+                                    </span>
+                                    <span>
+                                        <span>of.</span>
+                                    </span>
+                                </p>
+                                <a href="#" data-scroll-down class="m-hero__scroll" data-cssanimate="span" data-text="Scroll down">
+                                    <span>Scroll down</span>
+                                    ¬
+      
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--gray " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>1</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>Obama</span>
+                                        </span>
+                                        <span>
+                                            <span>Presidency</span>
+                                        </span>
+                                        <span>
+                                            <span>Oral</span>
+                                        </span>
+                                        <span>
+                                            <span>History</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Strategy</span>
+                                            <br>
+                                            <span>Branding</span>
+                                            <br>
+                                            <span>Design</span>
+                                            <br>
+                                            <span>Development</span>
+                                            <br>
+                                            <span>AI</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>Columbia University</span>
+                                            <br>
+                                            <span>Obama Foundation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--video" data-observe>
+                                        <div class="picture">
+                                            <div class="browser-bar "></div>
+                                            <video data-src="/public/upload/works/modules/video/6644d9dc83908.mp4?v=1716366993" data-src-mobile="/public/upload/works/modules/video/6644d9dc83908_mobile.mp4?v=1716366998" playsinline loop muted autoplay preload="none" poster="/public/upload/works/modules/desktop/6644d9dc83908.webp?v=1716366993"></video>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">Obama Presidency Oral History</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">Produced by Incite at Columbia University, this study is the official oral history of the Obama presidency, consisting of 470 interviews with officials, activists, artists, and organizers. We helped create a new standard for this type of production by analyzing the interviews using AI models, which led to the creation of several additional interactive tools designed to browse this vast collection.
+      </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap-wide"></div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644bd8840252.webp?v=1716021977, /public/upload/works/modules/mobile_x2/6644bd8840252.webp?v=1716021977 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644bd8840252.jpg?v=1716021977, /public/upload/works/modules/mobile_x2/6644bd8840252.jpg?v=1716021977 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644bd8840252.webp?v=1716021977, /public/upload/works/modules/desktop_x2/6644bd8840252.webp?v=1716021977 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644bd8840252.jpg?v=1716021977, /public/upload/works/modules/desktop_x2/6644bd8840252.jpg?v=1716021977 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap"></div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644c09ce73d7.svg?v=1715781987">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--quote" data-observe>
+                                        <blockquote class="quote" data-scroll="quote">
+                                            <svg class="svg-quote" viewBox="0 0 51 49">
+                                                <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                            </svg>
+                                            <p class="quote__content">
+                                                <span>
+                                                    <span>We</span>
+                                                </span>
+                                                <span>
+                                                    <span>are</span>
+                                                </span>
+                                                <span>
+                                                    <span>so</span>
+                                                </span>
+                                                <span>
+                                                    <span>proud</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>this</span>
+                                                </span>
+                                                <span>
+                                                    <span>project.</span>
+                                                </span>
+                                            </p>
+                                            <footer class="quote__footer">
+                                                <p class="quote__caption">
+                                                    Chris Pandza<br>Columbia University
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644c1a1235e1.svg?v=1715782060">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644c1b72d794.svg?v=1715782079">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--link" data-observe>
+                                        <a class="link" href="https://obamaoralhistory.columbia.edu/" target="_blank" rel="noopener noreferrer" data-cssanimate>
+                                            <div class="link__icon">
+                                                <svg class="svg-arrow" viewBox="0 0 43 43">
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                </svg>
+                                            </div>
+                                            <div class="link__box">Visit website
+        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-gfx="plain" class="module module--text has-next-sibling-work has-next-sibling-work">
+                        <div class="module__wrap">
+                            <div class="m-text">
+                                <div class="m-text__header c-header wrap">About</div>
+                                <div class="m-text__grid grid-wrap">
+                                    <div class="m-text__lead col-span-8" data-scroll="splitText">
+                                        <span>
+                                            <span>We</span>
+                                        </span>
+                                        <span>
+                                            <span>are</span>
+                                        </span>
+                                        <span>
+                                            <span>an</span>
+                                        </span>
+                                        <span>
+                                            <span>award-winning</span>
+                                        </span>
+                                        <span>
+                                            <span>digital</span>
+                                        </span>
+                                        <span>
+                                            <span>agency</span>
+                                        </span>
+                                        <span>
+                                            <span>collaborating</span>
+                                        </span>
+                                        <span>
+                                            <span>with</span>
+                                        </span>
+                                        <span>
+                                            <span>organizations</span>
+                                        </span>
+                                        <span>
+                                            <span>and</span>
+                                        </span>
+                                        <span>
+                                            <span>brands</span>
+                                        </span>
+                                        <span>
+                                            <span>to</span>
+                                        </span>
+                                        <span>
+                                            <span>craft</span>
+                                        </span>
+                                        <span>
+                                            <span>custom</span>
+                                        </span>
+                                        <span>
+                                            <span>digital</span>
+                                        </span>
+                                        <span>
+                                            <span>experiences.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--gray " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>2</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>Penderecki's</span>
+                                        </span>
+                                        <span>
+                                            <span>Garden</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Strategy</span>
+                                            <br>
+                                            <span>Animation</span>
+                                            <br>
+                                            <span>Design</span>
+                                            <br>
+                                            <span>Development</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>Adam Mickiewicz Institute</span>
+                                            <br>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Awards</div>
+                                        <div>
+                                            <span>Awwwards SOTD</span>
+                                            <br>
+                                            <span>Developer Award</span>
+                                            <br>
+                                            <span>Communication Arts WebPick</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--video" data-observe>
+                                        <div class="picture">
+                                            <div class="browser-bar browser-bar--light"></div>
+                                            <video data-src="/public/upload/works/modules/video/6644dc79291a5.mp4?v=1716026274" data-src-mobile="/public/upload/works/modules/video/6644dc79291a5_mobile.mp4?v=1716026486" playsinline loop muted autoplay preload="none" poster="/public/upload/works/modules/desktop/6644dc79291a5.webp?v=1716029040"></video>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">Penderecki &#039;s Garden</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">Virtual garden of Krzysztof Penderecki, one of the greatest avant-garde composers of the 20th century and passionate gardener. Through the virtual garden’s layout, architectural structures and vegetation, audiences are invited to explore the life of Penderecki alongside compositions, inspirations and poems.
+      </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap"></div>
+                                    <div class="m-work__tile m-work__tile--link" data-observe>
+                                        <a class="link" href="https://pendereckisgarden.pl/en" target="_blank" rel="noopener noreferrer" data-cssanimate>
+                                            <div class="link__icon">
+                                                <svg class="svg-arrow" viewBox="0 0 43 43">
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                </svg>
+                                            </div>
+                                            <div class="link__box">Visit website
+        </div>
+                                        </a>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644dd28f187d.svg?v=1715789109">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644dd74e7b08.webp?v=1716023216, /public/upload/works/modules/mobile_x2/6644dd74e7b08.webp?v=1716023216 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644dd74e7b08.jpg?v=1716023216, /public/upload/works/modules/mobile_x2/6644dd74e7b08.jpg?v=1716023216 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644dd74e7b08.webp?v=1716023216, /public/upload/works/modules/desktop_x2/6644dd74e7b08.webp?v=1716023216 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644dd74e7b08.jpg?v=1716023216, /public/upload/works/modules/desktop_x2/6644dd74e7b08.jpg?v=1716023216 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644ddc93eee9.webp?v=1716023224, /public/upload/works/modules/mobile_x2/6644ddc93eee9.webp?v=1716023224 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644ddc93eee9.jpg?v=1716023224, /public/upload/works/modules/mobile_x2/6644ddc93eee9.jpg?v=1716023224 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644ddc93eee9.webp?v=1716023224, /public/upload/works/modules/desktop_x2/6644ddc93eee9.webp?v=1716023224 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644ddc93eee9.jpg?v=1716023224, /public/upload/works/modules/desktop_x2/6644ddc93eee9.jpg?v=1716023224 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--quote" data-observe>
+                                        <blockquote class="quote" data-scroll="quote">
+                                            <svg class="svg-quote" viewBox="0 0 51 49">
+                                                <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                            </svg>
+                                            <p class="quote__content">
+                                                <span>
+                                                    <span>I</span>
+                                                </span>
+                                                <span>
+                                                    <span>am</span>
+                                                </span>
+                                                <span>
+                                                    <span>sure</span>
+                                                </span>
+                                                <span>
+                                                    <span>this</span>
+                                                </span>
+                                                <span>
+                                                    <span>innovative</span>
+                                                </span>
+                                                <span>
+                                                    <span>work</span>
+                                                </span>
+                                                <span>
+                                                    <span>will</span>
+                                                </span>
+                                                <span>
+                                                    <span>inspire</span>
+                                                </span>
+                                                <span>
+                                                    <span>the</span>
+                                                </span>
+                                                <span>
+                                                    <span>next</span>
+                                                </span>
+                                                <span>
+                                                    <span>generation</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>creators.</span>
+                                                </span>
+                                            </p>
+                                            <footer class="quote__footer">
+                                                <p class="quote__caption">Elzbieta Penderecka</p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-small" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644de8131154.webp?v=1716023240, /public/upload/works/modules/mobile_x2/6644de8131154.webp?v=1716023240 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644de8131154.png?v=1716023240, /public/upload/works/modules/mobile_x2/6644de8131154.png?v=1716023240 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644de8131154.webp?v=1716023240, /public/upload/works/modules/desktop_x2/6644de8131154.webp?v=1716023240 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644de8131154.png?v=1716023240, /public/upload/works/modules/desktop_x2/6644de8131154.png?v=1716023240 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644df0d5e505.svg?v=1715789597">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-gfx="dots" class="module module--text has-next-sibling-work has-next-sibling-work">
+                        <div class="module__wrap">
+                            <div class="m-text">
+                                <div class="m-text__header c-header wrap">About</div>
+                                <div class="m-text__grid grid-wrap">
+                                    <div class="m-text__lead col-span-8" data-scroll="splitText">
+                                        <span>
+                                            <span>We</span>
+                                        </span>
+                                        <span>
+                                            <span>start</span>
+                                        </span>
+                                        <span>
+                                            <span>a</span>
+                                        </span>
+                                        <span>
+                                            <span>day</span>
+                                        </span>
+                                        <span>
+                                            <span>crafting</span>
+                                        </span>
+                                        <span>
+                                            <span>animations</span>
+                                        </span>
+                                        <span>
+                                            <span>for</span>
+                                        </span>
+                                        <span>
+                                            <span>the</span>
+                                        </span>
+                                        <span>
+                                            <span>Wall</span>
+                                        </span>
+                                        <span>
+                                            <span>Street</span>
+                                        </span>
+                                        <span>
+                                            <span>Journal.</span>
+                                        </span>
+                                        <span>
+                                            <span>Then,</span>
+                                        </span>
+                                        <span>
+                                            <span>we</span>
+                                        </span>
+                                        <span>
+                                            <span>move</span>
+                                        </span>
+                                        <span>
+                                            <span>to</span>
+                                        </span>
+                                        <span>
+                                            <span>AI</span>
+                                        </span>
+                                        <span>
+                                            <span>research</span>
+                                        </span>
+                                        <span>
+                                            <span>on</span>
+                                        </span>
+                                        <span>
+                                            <span>environmental</span>
+                                        </span>
+                                        <span>
+                                            <span>issues</span>
+                                        </span>
+                                        <span>
+                                            <span>with</span>
+                                        </span>
+                                        <span>
+                                            <span>scientists</span>
+                                        </span>
+                                        <span>
+                                            <span>from</span>
+                                        </span>
+                                        <span>
+                                            <span>Berkeley.</span>
+                                        </span>
+                                        <span>
+                                            <span>That's</span>
+                                        </span>
+                                        <span>
+                                            <span>what</span>
+                                        </span>
+                                        <span>
+                                            <span>we</span>
+                                        </span>
+                                        <span>
+                                            <span>do.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--gray " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>3</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>Lalka</span>
+                                        </span>
+                                        <span>
+                                            <span>Theatre</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Animation</span>
+                                            <br>
+                                            <span>Design</span>
+                                            <br>
+                                            <span>Development</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>Lalka Theater</span>
+                                            <br>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Awards</div>
+                                        <div>
+                                            <span>Awwwards SOTD</span>
+                                            <br>
+                                            <span>Developer Award</span>
+                                            <br>
+                                            <span>Mobile Excellence</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--video" data-observe>
+                                        <div class="picture">
+                                            <div class="browser-bar "></div>
+                                            <video data-src="/public/upload/works/modules/video/6644d96e19edd.mp4?v=1715788149" data-src-mobile="/public/upload/works/modules/video/6644d96e19edd_mobile.mp4?v=1716026659" playsinline loop muted autoplay preload="none" poster="/public/upload/works/modules/desktop/6644d96e19edd.webp?v=1716029078"></video>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">Lalka Theatre</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">
+                                                The Lalka Theatre website links puppet animations with fantastic entertainment that audiences can expect from staged productions.<br/>
+                                                <br/>This beautiful and funny website is one of our all-time favorites!
+      
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap"></div>
+                                    <div class="m-work__tile m-work__tile--link" data-observe>
+                                        <a class="link" href="https://teatrlalka.pl/en" target="_blank" rel="noopener noreferrer" data-cssanimate>
+                                            <div class="link__icon">
+                                                <svg class="svg-arrow" viewBox="0 0 43 43">
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                </svg>
+                                            </div>
+                                            <div class="link__box">Visit website
+        </div>
+                                        </a>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644cc600336e.webp?v=1716023259, /public/upload/works/modules/mobile_x2/6644cc600336e.webp?v=1716023259 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644cc600336e.png?v=1716023259, /public/upload/works/modules/mobile_x2/6644cc600336e.png?v=1716023259 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644cc600336e.webp?v=1716023259, /public/upload/works/modules/desktop_x2/6644cc600336e.webp?v=1716023259 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644cc600336e.png?v=1716023259, /public/upload/works/modules/desktop_x2/6644cc600336e.png?v=1716023259 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644ccac755df.webp?v=1716023266, /public/upload/works/modules/mobile_x2/6644ccac755df.webp?v=1716023266 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644ccac755df.jpg?v=1716023266, /public/upload/works/modules/mobile_x2/6644ccac755df.jpg?v=1716023266 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644ccac755df.webp?v=1716023266, /public/upload/works/modules/desktop_x2/6644ccac755df.webp?v=1716023266 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644ccac755df.jpg?v=1716023266, /public/upload/works/modules/desktop_x2/6644ccac755df.jpg?v=1716023266 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-gfx="squares" class="module module--quote has-next-sibling-work has-next-sibling-work">
+                        <div class="module__wrap">
+                            <div class="m-quote">
+                                <div class="m-quote__header c-header wrap">Quotes</div>
+                                <div class="m-quote__grid grid-wrap">
+                                    <blockquote class="quote quote--big" data-scroll="quote">
+                                        <svg class="svg-quote" viewBox="0 0 51 49">
+                                            <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                        </svg>
+                                        <p class="quote__content">
+                                            <span>
+                                                <span>To</span>
+                                            </span>
+                                            <span>
+                                                <span>our</span>
+                                            </span>
+                                            <span>
+                                                <span>surprise</span>
+                                            </span>
+                                            <span>
+                                                <span>and</span>
+                                            </span>
+                                            <span>
+                                                <span>delight,</span>
+                                            </span>
+                                            <span>
+                                                <span>working</span>
+                                            </span>
+                                            <span>
+                                                <span>with</span>
+                                            </span>
+                                            <span>
+                                                <span>Huncwot</span>
+                                            </span>
+                                            <span>
+                                                <span>on</span>
+                                            </span>
+                                            <span>
+                                                <span>the</span>
+                                            </span>
+                                            <span>
+                                                <span>new</span>
+                                            </span>
+                                            <span>
+                                                <span>Harvard</span>
+                                            </span>
+                                            <span>
+                                                <span>Film</span>
+                                            </span>
+                                            <span>
+                                                <span>Archive</span>
+                                            </span>
+                                            <span>
+                                                <span>website</span>
+                                            </span>
+                                            <span>
+                                                <span>was</span>
+                                            </span>
+                                            <span>
+                                                <span>an</span>
+                                            </span>
+                                            <span>
+                                                <span>absolute</span>
+                                            </span>
+                                            <span>
+                                                <span>dream</span>
+                                            </span>
+                                            <span>
+                                                <span>every</span>
+                                            </span>
+                                            <span>
+                                                <span>step</span>
+                                            </span>
+                                            <span>
+                                                <span>of</span>
+                                            </span>
+                                            <span>
+                                                <span>the</span>
+                                            </span>
+                                            <span>
+                                                <span>way.</span>
+                                            </span>
+                                        </p>
+                                        <footer class="quote__footer">
+                                            <p class="quote__caption">Brittany Gravely, Publicist</p>
+                                            <picture class="quote__image">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/modules/mobile/6645c439b5ce3_2.webp?v=1716024155, /public/upload/modules/mobile_x2/6645c439b5ce3_2.webp?v=1716024155 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/modules/mobile/6645c439b5ce3_2.png?v=1716024155, /public/upload/modules/mobile_x2/6645c439b5ce3_2.png?v=1716024155 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/modules/desktop/6645c439b5ce3_2.webp?v=1716024155, /public/upload/modules/desktop_x2/6645c439b5ce3_2.webp?v=1716024155 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/modules/desktop/6645c439b5ce3_2.png?v=1716024155, /public/upload/modules/desktop_x2/6645c439b5ce3_2.png?v=1716024155 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--black " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>4</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>Harvard</span>
+                                        </span>
+                                        <span>
+                                            <span>Film</span>
+                                        </span>
+                                        <span>
+                                            <span>Archive</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Strategy</span>
+                                            <br>
+                                            <span>Design</span>
+                                            <br>
+                                            <span>Development</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>Harvard University</span>
+                                            <br>
+                                            <span>Cambridge, MA</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Awards</div>
+                                        <div>
+                                            <span>Webby</span>
+                                            <br>
+                                            <span>Awwwards</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--video" data-observe>
+                                        <div class="picture">
+                                            <div class="browser-bar "></div>
+                                            <video data-src="/public/upload/works/modules/video/6644d9abdb0e0.mp4?v=1716027021" data-src-mobile="/public/upload/works/modules/video/6644d9abdb0e0_mobile.mp4?v=1716026939" playsinline loop muted autoplay preload="none" poster="/public/upload/works/modules/desktop/6644d9abdb0e0.webp?v=1716029066"></video>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">Harvard Film Archive</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">The Harvard Film Archive is an academic institution dedicated to the collection, preservation and exhibition of film located on the Harvard University campus. Huncwot was commissioned to create a digital presence of the HFA which was inspired by its iconic Carpenter Center building, designed by legendary french architect Le Corbusier in the early 1960s.
+      </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap-wide"></div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644c87b3cafe.svg?v=1715783850">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644c9a3360c1.webp?v=1716023300, /public/upload/works/modules/mobile_x2/6644c9a3360c1.webp?v=1716023300 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644c9a3360c1.jpg?v=1716023300, /public/upload/works/modules/mobile_x2/6644c9a3360c1.jpg?v=1716023300 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644c9a3360c1.webp?v=1716023300, /public/upload/works/modules/desktop_x2/6644c9a3360c1.webp?v=1716023300 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644c9a3360c1.jpg?v=1716023300, /public/upload/works/modules/desktop_x2/6644c9a3360c1.jpg?v=1716023300 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644c9b9927dd.svg?v=1715784131">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--quote-small" data-observe>
+                                        <blockquote class="quote quote--small" data-scroll="quote">
+                                            <svg class="svg-quote" viewBox="0 0 51 49">
+                                                <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                            </svg>
+                                            <p class="quote__content">
+                                                <span>
+                                                    <span>This</span>
+                                                </span>
+                                                <span>
+                                                    <span>unique</span>
+                                                </span>
+                                                <span>
+                                                    <span>website</span>
+                                                </span>
+                                                <span>
+                                                    <span>combines</span>
+                                                </span>
+                                                <span>
+                                                    <span>an</span>
+                                                </span>
+                                                <span>
+                                                    <span>elegant</span>
+                                                </span>
+                                                <span>
+                                                    <span>beauty</span>
+                                                </span>
+                                                <span>
+                                                    <span>with</span>
+                                                </span>
+                                                <span>
+                                                    <span>user-friendliness,</span>
+                                                </span>
+                                                <span>
+                                                    <span>enhanced</span>
+                                                </span>
+                                                <span>
+                                                    <span>by</span>
+                                                </span>
+                                                <span>
+                                                    <span>beautiful</span>
+                                                </span>
+                                                <span>
+                                                    <span>animations</span>
+                                                </span>
+                                                <span>
+                                                    <span>and</span>
+                                                </span>
+                                                <span>
+                                                    <span>subtle</span>
+                                                </span>
+                                                <span>
+                                                    <span>cinematic</span>
+                                                </span>
+                                                <span>
+                                                    <span>effects.</span>
+                                                </span>
+                                            </p>
+                                            <footer class="quote__footer">
+                                                <p class="quote__caption">
+                                                    Brittany Gravely<br>Harvard University
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap"></div>
+                                    <div class="m-work__tile m-work__tile--link" data-observe>
+                                        <a class="link" href="https://harvardfilmarchive.org" target="_blank" rel="noopener noreferrer" data-cssanimate>
+                                            <div class="link__icon">
+                                                <svg class="svg-arrow" viewBox="0 0 43 43">
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                </svg>
+                                            </div>
+                                            <div class="link__box">Visit website
+        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-gfx="plain" class="module module--quote has-next-sibling-work has-next-sibling-work">
+                        <div class="module__wrap">
+                            <div class="m-quote">
+                                <div class="m-quote__header c-header wrap">Quotes</div>
+                                <div class="m-quote__grid grid-wrap">
+                                    <blockquote class="quote quote--big" data-scroll="quote">
+                                        <svg class="svg-quote" viewBox="0 0 51 49">
+                                            <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                        </svg>
+                                        <p class="quote__content">
+                                            <span>
+                                                <span>Huncwot</span>
+                                            </span>
+                                            <span>
+                                                <span>is</span>
+                                            </span>
+                                            <span>
+                                                <span>constantly</span>
+                                            </span>
+                                            <span>
+                                                <span>coming</span>
+                                            </span>
+                                            <span>
+                                                <span>to</span>
+                                            </span>
+                                            <span>
+                                                <span>us</span>
+                                            </span>
+                                            <span>
+                                                <span>with</span>
+                                            </span>
+                                            <span>
+                                                <span>creative</span>
+                                            </span>
+                                            <span>
+                                                <span>solutions—they</span>
+                                            </span>
+                                            <span>
+                                                <span>have</span>
+                                            </span>
+                                            <span>
+                                                <span>gone</span>
+                                            </span>
+                                            <span>
+                                                <span>above</span>
+                                            </span>
+                                            <span>
+                                                <span>and</span>
+                                            </span>
+                                            <span>
+                                                <span>beyond</span>
+                                            </span>
+                                            <span>
+                                                <span>to</span>
+                                            </span>
+                                            <span>
+                                                <span>ensure</span>
+                                            </span>
+                                            <span>
+                                                <span>they</span>
+                                            </span>
+                                            <span>
+                                                <span>are</span>
+                                            </span>
+                                            <span>
+                                                <span>our</span>
+                                            </span>
+                                            <span>
+                                                <span>most</span>
+                                            </span>
+                                            <span>
+                                                <span>dependable,</span>
+                                            </span>
+                                            <span>
+                                                <span>creative</span>
+                                            </span>
+                                            <span>
+                                                <span>and</span>
+                                            </span>
+                                            <span>
+                                                <span>solutions-oriented</span>
+                                            </span>
+                                            <span>
+                                                <span>partner.</span>
+                                            </span>
+                                        </p>
+                                        <footer class="quote__footer">
+                                            <p class="quote__caption">Elana Luppino, Director of Marketing Operations</p>
+                                            <picture class="quote__image">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/modules/mobile/6645de34bfe5c_2.webp?v=1716024169, /public/upload/modules/mobile_x2/6645de34bfe5c_2.webp?v=1716024169 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/modules/mobile/6645de34bfe5c_2.png?v=1716024169, /public/upload/modules/mobile_x2/6645de34bfe5c_2.png?v=1716024169 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/modules/desktop/6645de34bfe5c_2.webp?v=1716024169, /public/upload/modules/desktop_x2/6645de34bfe5c_2.webp?v=1716024169 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/modules/desktop/6645de34bfe5c_2.png?v=1716024169, /public/upload/modules/desktop_x2/6645de34bfe5c_2.png?v=1716024169 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--gray " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>5</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>European</span>
+                                        </span>
+                                        <span>
+                                            <span>Film</span>
+                                        </span>
+                                        <span>
+                                            <span>Academy</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Branding</span>
+                                            <br>
+                                            <span>Animation</span>
+                                            <br>
+                                            <span>Design</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>EFA</span>
+                                            <br>
+                                            <span>Berlin, Germany</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--image" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644da4a9edd8.webp?v=1716023341, /public/upload/works/modules/mobile_x2/6644da4a9edd8.webp?v=1716023341 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644da4a9edd8.jpg?v=1716023341, /public/upload/works/modules/mobile_x2/6644da4a9edd8.jpg?v=1716023341 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644da4a9edd8.webp?v=1716023341, /public/upload/works/modules/desktop_x2/6644da4a9edd8.webp?v=1716023341 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644da4a9edd8.jpg?v=1716023341, /public/upload/works/modules/desktop_x2/6644da4a9edd8.jpg?v=1716023341 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">European Film Academy</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">The European Film Academy, established in 1988, brings together the most important figures of European cinema. The new visual identity marks a fresh chapter inspired by the classic Academy ratio (1.375:1). Evolving frames create a sense of movement and dynamism, symbolizing the mission to celebrate and unite filmmakers while engaging and educating audiences. These frames also invite viewers into a shared cinematic space.
+      </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644db2ee0182.svg?v=1715788604">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source srcset="/public/upload/works/modules/original/6644db40bf7bd.svg?v=1715788615">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading " loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644db8437040.webp?v=1716023354, /public/upload/works/modules/mobile_x2/6644db8437040.webp?v=1716023354 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644db8437040.jpg?v=1716023354, /public/upload/works/modules/mobile_x2/6644db8437040.jpg?v=1716023354 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644db8437040.webp?v=1716023355, /public/upload/works/modules/desktop_x2/6644db8437040.webp?v=1716023355 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644db8437040.jpg?v=1716023355, /public/upload/works/modules/desktop_x2/6644db8437040.jpg?v=1716023355 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--quote-small" data-observe>
+                                        <blockquote class="quote quote--small" data-scroll="quote">
+                                            <svg class="svg-quote" viewBox="0 0 51 49">
+                                                <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                            </svg>
+                                            <p class="quote__content">
+                                                <span>
+                                                    <span>This</span>
+                                                </span>
+                                                <span>
+                                                    <span>logo</span>
+                                                </span>
+                                                <span>
+                                                    <span>stands</span>
+                                                </span>
+                                                <span>
+                                                    <span>for</span>
+                                                </span>
+                                                <span>
+                                                    <span>an</span>
+                                                </span>
+                                                <span>
+                                                    <span>organization</span>
+                                                </span>
+                                                <span>
+                                                    <span>that</span>
+                                                </span>
+                                                <span>
+                                                    <span>is</span>
+                                                </span>
+                                                <span>
+                                                    <span>aware</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>its</span>
+                                                </span>
+                                                <span>
+                                                    <span>rich</span>
+                                                </span>
+                                                <span>
+                                                    <span>tradition,</span>
+                                                </span>
+                                                <span>
+                                                    <span>focused</span>
+                                                </span>
+                                                <span>
+                                                    <span>on</span>
+                                                </span>
+                                                <span>
+                                                    <span>connecting</span>
+                                                </span>
+                                                <span>
+                                                    <span>this</span>
+                                                </span>
+                                                <span>
+                                                    <span>history</span>
+                                                </span>
+                                                <span>
+                                                    <span>to</span>
+                                                </span>
+                                                <span>
+                                                    <span>today’s</span>
+                                                </span>
+                                                <span>
+                                                    <span>world,</span>
+                                                </span>
+                                                <span>
+                                                    <span>and</span>
+                                                </span>
+                                                <span>
+                                                    <span>open</span>
+                                                </span>
+                                                <span>
+                                                    <span>to</span>
+                                                </span>
+                                                <span>
+                                                    <span>what</span>
+                                                </span>
+                                                <span>
+                                                    <span>tomorrow</span>
+                                                </span>
+                                                <span>
+                                                    <span>will</span>
+                                                </span>
+                                                <span>
+                                                    <span>bring.</span>
+                                                </span>
+                                            </p>
+                                            <footer class="quote__footer">
+                                                <p class="quote__caption">
+                                                    Matthijs Wouter Knol<br>CEO and Director at European Film Academy
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644dbea507b9.webp?v=1716023361, /public/upload/works/modules/mobile_x2/6644dbea507b9.webp?v=1716023361 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6644dbea507b9.jpg?v=1716023361, /public/upload/works/modules/mobile_x2/6644dbea507b9.jpg?v=1716023361 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644dbea507b9.webp?v=1716023361, /public/upload/works/modules/desktop_x2/6644dbea507b9.webp?v=1716023361 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6644dbea507b9.jpg?v=1716023361, /public/upload/works/modules/desktop_x2/6644dbea507b9.jpg?v=1716023361 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-gfx="waves" class="module module--quote has-next-sibling-work has-next-sibling-work">
+                        <div class="module__wrap">
+                            <div class="m-quote">
+                                <div class="m-quote__header c-header wrap">Quotes</div>
+                                <div class="m-quote__grid grid-wrap">
+                                    <blockquote class="quote quote--big" data-scroll="quote">
+                                        <svg class="svg-quote" viewBox="0 0 51 49">
+                                            <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                        </svg>
+                                        <p class="quote__content">
+                                            <span>
+                                                <span>Are</span>
+                                            </span>
+                                            <span>
+                                                <span>you</span>
+                                            </span>
+                                            <span>
+                                                <span>kidding</span>
+                                            </span>
+                                            <span>
+                                                <span>me???</span>
+                                            </span>
+                                            <span>
+                                                <span>This</span>
+                                            </span>
+                                            <span>
+                                                <span>is</span>
+                                            </span>
+                                            <span>
+                                                <span>incredible.</span>
+                                            </span>
+                                            <span>
+                                                <span>I</span>
+                                            </span>
+                                            <span>
+                                                <span>am</span>
+                                            </span>
+                                            <span>
+                                                <span>blown</span>
+                                            </span>
+                                            <span>
+                                                <span>away</span>
+                                            </span>
+                                            <span>
+                                                <span>by</span>
+                                            </span>
+                                            <span>
+                                                <span>it</span>
+                                            </span>
+                                            <span>
+                                                <span>all.</span>
+                                            </span>
+                                            <span>
+                                                <span>I</span>
+                                            </span>
+                                            <span>
+                                                <span>cannot</span>
+                                            </span>
+                                            <span>
+                                                <span>believe</span>
+                                            </span>
+                                            <span>
+                                                <span>it.</span>
+                                            </span>
+                                        </p>
+                                        <footer class="quote__footer">
+                                            <p class="quote__caption">Chris Pandza, Producer</p>
+                                            <picture class="quote__image">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/modules/mobile/66462b0ed932a_2.png?v=1715984628, /public/upload/modules/mobile_x2/66462b0ed932a_2.png?v=1715984628 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/modules/desktop/66462b0ed932a_2.png?v=1715984628, /public/upload/modules/desktop_x2/66462b0ed932a_2.png?v=1715984628 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--work module--gray " data-observe>
+                        <div class="module__wrap">
+                            <div class="m-work">
+                                <div class="m-work__header c-header grid-wrap">
+                                    <div class="m-work__number" role="presentation">
+                                        <div>Project No.</div>
+                                        <div data-observe>
+                                            <strong>
+                                                <span>0</span>
+                                                <span>6</span>
+                                            </strong>
+                                            <i>/</i>
+                                            <strong>06</strong>
+                                        </div>
+                                    </div>
+                                    <h2 class="m-work__title tablet-hide" data-scroll="splitText">
+                                        <span>
+                                            <span>Elders</span>
+                                        </span>
+                                        <span>
+                                            <span>Project</span>
+                                        </span>
+                                    </h2>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Expertise</div>
+                                        <div>
+                                            <span>Strategy</span>
+                                            <br>
+                                            <span>Branding</span>
+                                            <br>
+                                            <span>Design</span>
+                                            <br>
+                                            <span>Development</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Client</div>
+                                        <div>
+                                            <span>Columbia University</span>
+                                            <br>
+                                            <span>New York City</span>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__detail" data-observe>
+                                        <div>Awards</div>
+                                        <div>
+                                            <span>Anthem Awards - Gold</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-work__tiles grid-wrap">
+                                    <div class="m-work__tile m-work__tile--screenshot m-work__tile--video" data-observe>
+                                        <div class="picture">
+                                            <div class="browser-bar "></div>
+                                            <video data-src="/public/upload/works/modules/video/66477fc73bfab.mp4?v=1716027212" data-src-mobile="/public/upload/works/modules/video/66477fc73bfab_mobile.mp4?v=1716027117" playsinline loop muted autoplay preload="none" poster="/public/upload/works/modules/desktop/66477fc73bfab.webp?v=1716029052"></video>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--description" data-observe>
+                                        <div class="description">
+                                            <div class="m-work__title tablet-only">Elders Project</div>
+                                            <span class="description__title">Info</span>
+                                            <p class="description__paragraph">Established by Jacqueline Woodson and produced by Columbia University, the Elders Project captures and celebrates the untold stories of 250+ elders-activists, storytellers, and community builders - who have witnessed and shaped monumental change in American public life. We are extremely proud that we had the opportunity to bring these amazing stories to life by creating this beautiful and colorful project.
+      </p>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap-wide"></div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/66478010e71c2.webp?v=1716023413, /public/upload/works/modules/mobile_x2/66478010e71c2.webp?v=1716023413 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/66478010e71c2.jpg?v=1716023413, /public/upload/works/modules/mobile_x2/66478010e71c2.jpg?v=1716023413 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/66478010e71c2.webp?v=1716023413, /public/upload/works/modules/desktop_x2/66478010e71c2.webp?v=1716023414 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/66478010e71c2.jpg?v=1716023413, /public/upload/works/modules/desktop_x2/66478010e71c2.jpg?v=1716023414 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture-wide" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/66478023e6e92.webp?v=1716023490, /public/upload/works/modules/mobile_x2/66478023e6e92.webp?v=1716023490 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/66478023e6e92.jpg?v=1716023489, /public/upload/works/modules/mobile_x2/66478023e6e92.jpg?v=1716023490 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/66478023e6e92.webp?v=1716023490, /public/upload/works/modules/desktop_x2/66478023e6e92.webp?v=1716023491 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/66478023e6e92.jpg?v=1716023490, /public/upload/works/modules/desktop_x2/66478023e6e92.jpg?v=1716023491 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--picture" data-observe>
+                                        <div class="picture">
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6647803719e5e.webp?v=1716023557, /public/upload/works/modules/mobile_x2/6647803719e5e.webp?v=1716023557 2x" type="image/webp">
+                                                <source media="(max-width: 1023px)" srcset="/public/upload/works/modules/mobile/6647803719e5e.jpg?v=1716023557, /public/upload/works/modules/mobile_x2/6647803719e5e.jpg?v=1716023557 2x">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6647803719e5e.webp?v=1716023557, /public/upload/works/modules/desktop_x2/6647803719e5e.webp?v=1716023558 2x" type="image/webp">
+                                                <source media="(min-width: 1024px)" srcset="/public/upload/works/modules/desktop/6647803719e5e.jpg?v=1716023557, /public/upload/works/modules/desktop_x2/6647803719e5e.jpg?v=1716023557 2x">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--quote-small" data-observe>
+                                        <blockquote class="quote quote--small" data-scroll="quote">
+                                            <svg class="svg-quote" viewBox="0 0 51 49">
+                                                <path d="M27.135 49V27.154c0-7.227 2.144-13.156 6.434-17.787C37.859 4.666 43.669 1.544 51 0v11.788c-2.262.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.78 1.263-1.287 2.736-1.52 4.42-.235 1.614-.352 3.403-.352 5.368v1.616H51V49H27.135zM0 49V27.154c0-7.227 2.145-13.156 6.434-17.787 4.29-4.701 10.1-7.823 17.431-9.367v11.788c-2.261.631-4.094 1.403-5.498 2.315-1.404.912-2.496 2-3.276 3.263-.702 1.263-1.209 2.736-1.52 4.42-.235 1.614-.351 3.403-.351 5.368v1.616h10.645V49H0z" fill="#333"/>
+                                            </svg>
+                                            <p class="quote__content">
+                                                <span>
+                                                    <span>It's</span>
+                                                </span>
+                                                <span>
+                                                    <span>absolutely</span>
+                                                </span>
+                                                <span>
+                                                    <span>breathtaking—we</span>
+                                                </span>
+                                                <span>
+                                                    <span>cannot</span>
+                                                </span>
+                                                <span>
+                                                    <span>believe</span>
+                                                </span>
+                                                <span>
+                                                    <span>it.</span>
+                                                </span>
+                                                <span>
+                                                    <span>The</span>
+                                                </span>
+                                                <span>
+                                                    <span>final</span>
+                                                </span>
+                                                <span>
+                                                    <span>touches,</span>
+                                                </span>
+                                                <span>
+                                                    <span>the</span>
+                                                </span>
+                                                <span>
+                                                    <span>animations,</span>
+                                                </span>
+                                                <span>
+                                                    <span>the</span>
+                                                </span>
+                                                <span>
+                                                    <span>presentation</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>all</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>the</span>
+                                                </span>
+                                                <span>
+                                                    <span>materials,</span>
+                                                </span>
+                                                <span>
+                                                    <span>everything</span>
+                                                </span>
+                                                <span>
+                                                    <span>is</span>
+                                                </span>
+                                                <span>
+                                                    <span>full</span>
+                                                </span>
+                                                <span>
+                                                    <span>of</span>
+                                                </span>
+                                                <span>
+                                                    <span>life.</span>
+                                                </span>
+                                                <span>
+                                                    <span>This</span>
+                                                </span>
+                                                <span>
+                                                    <span>is</span>
+                                                </span>
+                                                <span>
+                                                    <span>really</span>
+                                                </span>
+                                                <span>
+                                                    <span>a</span>
+                                                </span>
+                                                <span>
+                                                    <span>dream</span>
+                                                </span>
+                                                <span>
+                                                    <span>come</span>
+                                                </span>
+                                                <span>
+                                                    <span>true.</span>
+                                                </span>
+                                            </p>
+                                            <footer class="quote__footer">
+                                                <p class="quote__caption">
+                                                    Chris Pandza<br>Columbia University
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                    <div class="m-work__tile m-work__tile--gap-wide"></div>
+                                    <div class="m-work__tile m-work__tile--link" data-observe>
+                                        <a class="link" href="https://eldersproject.incite.columbia.edu/" target="_blank" rel="noopener noreferrer" data-cssanimate>
+                                            <div class="link__icon">
+                                                <svg class="svg-arrow" viewBox="0 0 43 43">
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                    <path d="M4.794.583l-.03 11.55 16.434.036L-.01 33.377l9.347 9.346 21.207-21.207.035 16.53 11.553-.029L42.05.664 4.794.583z" fill="#333"/>
+                                                </svg>
+                                            </div>
+                                            <div class="link__box">Visit website
+        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="module module--stats has-next-sibling-work " id="stats">
+                        <div class="module__wrap">
+                            <div class="m-stats">
+                                <div class="m-stats__header c-header wrap">Stats &amp;facts</div>
+                                <div class="m-stats__grid grid-wrap" data-observe>
+                                    <div class="m-stats__item col-span-5">
+                                        <div class="m-stats__number">
+                                            <div>
+                                                <span>2</span>
+                                                <span>0</span>
+                                                <span>0</span>
+                                                <span>7</span>
+                                            </div>
+                                        </div>
+                                        <div class="m-stats__label">The year we were born</div>
+                                    </div>
+                                    <div class="m-stats__item col-span-5">
+                                        <div class="m-stats__number">
+                                            <div>
+                                                <span>4</span>
+                                                <span>8</span>
+                                                <span>0</span>
+                                            </div>
+                                        </div>
+                                        <div class="m-stats__label">Projects delivered</div>
+                                    </div>
+                                    <div class="m-stats__item col-span-4 ">
+                                        <div class="m-stats__number">
+                                            <div>
+                                                <span>5</span>
+                                                <span>0</span>
+                                            </div>
+                                            <span class="icon-plus">+</span>
+                                        </div>
+                                        <div class="m-stats__label">
+                                            Awards, including <br>
+                                            Cannes Golden Lion<br>and Webbys
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </main>
+            <footer class="s-footer" data-scroll="footer" id="contact">
+                <div class="s-footer__cta grid-wrap">
+                    <div class="s-footer__main col-span-7">
+                        <div class="s-footer__lead">
+                            Now, if you have a project you would like to discuss, please reach out to Magda at <a href="mailto:office@huncwot.com">office@huncwot.com</a>
+                        </div>
+                        <div class="s-footer__picture js-pic">
+                            <picture>
+                                <source srcset="/public/magda-1.webp" type="image/webp">
+                                <source srcset="/public/magda-1.jpeg" type="image/jpeg">
+                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading" loading="lazy">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+                <div class="s-footer__bottom wrap">
+                    <div class="s-footer__colophon">© 2025 Huncwot</div>
+                    <div class="s-header__socials">
+                        <a href="https://www.linkedin.com/company/huncwot/" target="_blank" class="s-header__social-item" data-cssanimate="span" data-text="In">
+                            <span>In</span>
+                        </a>
+                        <a href="https://www.instagram.com/huncwotdigital/" target="_blank" class="s-header__social-item" data-cssanimate="span" data-text="Ig">
+                            <span>Ig</span>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="/public/theme/libs.min.js?v=4.0.66" defer></script>
+        <script src="/public/theme/scripts.min.js?v=4.0.66" defer></script>
+        <script>
+            const versionTag = document.head.querySelector('meta[name="version"]');
+            const version = versionTag instanceof HTMLMetaElement ? versionTag.content : null;
+            version && console.log(` version: %c${version}`, 'color: yellow');
+            window.location.search.indexOf('version') >= 0 && alert(`version: ${version}`);
+        </script>
+    </body>
+</html>
+<!-- cached in 0.0053250789642334 -->

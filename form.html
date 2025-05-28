@@ -1,0 +1,119 @@
+<div class="contact-form-container">
+    <form action="#" method="post">
+      <div class="form-row">
+        <input type="text" name="first_name" placeholder="Enter your first name" required>
+      </div>
+      <div class="form-row">
+        <input type="text" name="last_name" placeholder="Enter your last name" required>
+      </div>
+      <div class="form-row">
+        <input type="email" name="email" placeholder="Enter your email address" required>
+      </div>
+      <button type="submit" class="submit-button">Submit your details</button>
+    </form>
+</div>
+
+<style>
+    /* Container */
+    .contact-form-container {
+      /*max-width: 400px;*/
+      margin: auto;
+      padding: 0 2rem;
+      background: #fff;
+      border-radius: 8px;
+      /*box-shadow: 0 4px 12px rgba(0,0,0,0.1);*/
+      font-family: "Rufina", Sans-serif;
+    }
+
+    .contact-form-container h2 {
+      text-align: center;
+      color: #1F3926;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+    }
+
+    /* Input rows */
+    .form-row {
+      margin-bottom: 1rem;
+    }
+
+    .form-row input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-row input:focus {
+      outline: none;
+      border-color: #1F3926;
+    }
+
+    /* Submit button */
+    .submit-button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #1F3926;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #16311c;
+    }
+  </style>
+
+  <script>
+  (function() {
+    // Cookie helper
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('.contact-form-container form');
+      form.addEventListener('submit', function onSubmit(e) {
+        e.preventDefault(); // stop normal submit
+  
+        // Grab the field values
+        const firstName = this.querySelector('input[name="first_name"]').value.trim();
+        const lastName  = this.querySelector('input[name="last_name"]').value.trim();
+        const email     = this.querySelector('input[name="email"]').value.trim();
+  
+        // Read sessionId from cookie (may be null if not set yet)
+        const sessionId = getCookie('automindSessionId');
+  
+        // Build webhook URL with query params, include sessionId if present
+        const params = new URLSearchParams({ firstName, lastName, email });
+        if (sessionId) {
+          params.set('sessionId', sessionId);
+        }
+        const url = `https://automindfuture.app.n8n.cloud/webhook/fac9f668-bc3c-4654-beaa-b2bd6aebc912?${params}`;
+  
+        // Fire the GET request
+        fetch(url, { method: 'GET', cache: 'no-store' })
+          .then(res => {
+            if (!res.ok) {
+              console.error('n8n webhook error:', res.status, res.statusText);
+            } else {
+              console.log('n8n webhook triggered successfully');
+            }
+          })
+          .catch(err => console.error('Fetch error:', err));
+  
+        // Clear form (or redirect if you prefer)
+        this.reset();
+  
+        // Remove listener if only needed once
+        this.removeEventListener('submit', onSubmit);
+      }, true);
+    });
+  })();
+</script>
